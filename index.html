@@ -56,6 +56,16 @@
       font-family: 'Google Sans', sans-serif;
       font-weight: 600;
       margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+    }
+    .module-card h4 i {
+      color: hsl(204, 86%, 43%);
+      font-size: 0.95rem;
+      width: 1.4em;
+      margin-right: 0.45rem;
+      text-align: center;
+      flex: none;
     }
     .module-card p { margin: 0; font-size: 0.97rem; line-height: 1.6; }
 
@@ -247,7 +257,7 @@
     <div class="columns is-multiline" style="margin-top: 1rem;">
       <div class="column is-half">
         <div class="module-card">
-          <h4>Input Encoder</h4>
+          <h4><i class="fas fa-layer-group"></i>Input Encoder</h4>
           <p>
             RGB (DINOv3-S) and depth (ConvNeXt-T) features, together with goal and geometry tokens, are
             projected into a shared 384-d space, giving 130 context tokens — far more than the 8–10 used
@@ -259,7 +269,7 @@
       </div>
       <div class="column is-half">
         <div class="module-card">
-          <h4>Action Prediction</h4>
+          <h4><i class="fas fa-route"></i>Action Prediction</h4>
           <p>
             Decodes the action tokens into a sequence of linear and angular velocities, then converts
             them into a local waypoint trajectory and encodes it as an explicit spatial trajectory
@@ -269,7 +279,7 @@
       </div>
       <div class="column is-half">
         <div class="module-card">
-          <h4>Spatial Perception</h4>
+          <h4><i class="fas fa-ruler-combined"></i>Spatial Perception</h4>
           <p>
             Predicts the minimum obstacle distance at each waypoint and flags the trajectory as high-risk
             when it falls below the safety threshold &delta;<sub>s</sub> = 0.5 m. Because this task needs
@@ -280,7 +290,7 @@
       </div>
       <div class="column is-half">
         <div class="module-card">
-          <h4>Risk-Aware Correction</h4>
+          <h4><i class="fas fa-directions"></i>Risk-Aware Correction</h4>
           <p>
             Triggered only above the risk threshold. Instead of regressing a new action sequence, it
             predicts a low-dimensional <b>global yaw offset</b> over 19 bins spanning [&minus;45&deg;,
@@ -325,6 +335,22 @@
         resulting occupancy for both fine-tuning (GND, Spot) and pre-training (cat, horse) data. The red
         planar region is the estimated ground from plane fitting; blue regions are detected obstacles.
         Input is an image sequence of length 8.
+      </figcaption>
+    </figure>
+
+    <!-- Spatial perception -->
+    <h3 class="title is-5" style="margin-top: 2.5rem;">Effect of risk trajectory augmentation</h3>
+    <p class="content">
+      On the i2Nav dataset across five embodiment radii (0.5 m to 2.5 m; Body-L lies outside the training
+      range and tests generalization). Augmentation improves recognition of high-risk and collision
+      samples by roughly <b>5&times;</b> with almost no additional false alarms.
+    </p>
+    <figure class="fig">
+      <img src="static/images/spatial_perception.jpg" alt="Predicted obstacle clearance for different embodiment sizes">
+      <figcaption>
+        <b>Spatial perception under different embodiment sizes.</b> Given the same observation sequence,
+        the predicted clearance around each waypoint (blue discs) grows with the embodiment. For Body-L
+        the trajectory no longer fits, and the affected waypoints are flagged as high-risk (red).
       </figcaption>
     </figure>
   </div>
@@ -426,47 +452,6 @@
         </tbody>
       </table>
       <p class="table-note">SR: success rate. CR: collision rate. Five trials per method per setting.</p>
-    </div>
-
-    <!-- Spatial perception -->
-    <h3 class="title is-5" style="margin-top: 2.5rem;">Effect of risk trajectory augmentation</h3>
-    <p class="content">
-      On the i2Nav dataset across five embodiment radii (0.5 m to 2.5 m; Body-L lies outside the training
-      range and tests generalization). Augmentation improves recognition of high-risk and collision
-      samples by roughly <b>5&times;</b> with almost no additional false alarms.
-    </p>
-    <figure class="fig">
-      <img src="static/images/spatial_perception.jpg" alt="Predicted obstacle clearance for different embodiment sizes">
-      <figcaption>
-        <b>Spatial perception under different embodiment sizes.</b> Given the same observation sequence,
-        the predicted clearance around each waypoint (blue discs) grows with the embodiment. For Body-L
-        the trajectory no longer fits, and the affected waypoints are flagged as high-risk (red).
-      </figcaption>
-    </figure>
-    <div class="table-container">
-      <table class="table is-fullwidth is-narrow results">
-        <thead>
-          <tr>
-            <th rowspan="2">Size</th>
-            <th colspan="3" class="has-text-centered">w/ Augmentation</th>
-            <th colspan="3" class="has-text-centered">w/o Augmentation</th>
-          </tr>
-          <tr>
-            <th>TPR &uarr;</th><th>FAR &darr;</th><th>MAE &darr;</th>
-            <th>TPR &uarr;</th><th>FAR &darr;</th><th>MAE &darr;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="ours"><td>Body-S</td><td>84.9</td><td>0.00</td><td>0.471</td><td>12.9</td><td>0.00</td><td>0.664</td></tr>
-          <tr class="ours"><td>Body-S+</td><td>79.7</td><td>0.80</td><td>0.511</td><td>8.8</td><td>0.00</td><td>0.715</td></tr>
-          <tr class="ours"><td>Body-M</td><td>79.4</td><td>1.00</td><td>0.478</td><td>11.1</td><td>0.00</td><td>0.711</td></tr>
-          <tr class="ours"><td>Body-M+</td><td>70.6</td><td>2.50</td><td>0.532</td><td>21.6</td><td>1.06</td><td>0.712</td></tr>
-          <tr class="ours"><td>Body-L</td><td>73.8</td><td>5.30</td><td>0.582</td><td>29.2</td><td>0.00</td><td>0.799</td></tr>
-        </tbody>
-      </table>
-      <p class="table-note">
-        TPR computed on high-risk samples (distance &lt; 0.5 m). TPR and FAR in %, MAE in m.
-      </p>
     </div>
 
     <!-- Feature analysis -->

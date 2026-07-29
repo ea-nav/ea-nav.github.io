@@ -71,6 +71,7 @@
 </head>
 <body>
 
+
 <!-- ============ TITLE / AUTHORS / LINKS ============ -->
 <section class="hero">
   <div class="hero-body">
@@ -181,8 +182,43 @@
   </div>
 </section>
 
+<!-- ============ DATASET ============ -->
+<section class="section section-alt" id="dataset">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Cross-Embodiment Dataset</h2>
+    <p class="content has-text-justified">
+      We collect roughly <b>1,000 hours</b> of real-world first-person video from the Internet spanning
+      <b>eight embodiment categories</b> — including people, cats, dogs, horses, bicycles, karts, and
+      cars. Depth, trajectories, and camera intrinsics are annotated automatically with Depth-Anything-3;
+      embodiment geometry is annotated per category. Navigation pretraining only requires <em>scale
+      consistency</em> between trajectories and observations, not exact metric alignment, which makes
+      web-scale video usable. Compared with existing datasets, ours offers by far the broadest embodiment
+      coverage.
+    </p>
+
+    <div class="table-container">
+      <table class="table is-fullwidth is-narrow results">
+        <thead>
+          <tr>
+            <th>Dataset</th><th>Embodiments</th><th>Hours</th><th>Source</th><th>Supervision</th><th>Camera</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>SCAND</td><td>2</td><td>9</td><td>Real</td><td>GT</td><td>Pinhole</td></tr>
+          <tr><td>TartanGround</td><td>3</td><td>~40</td><td>Synthetic</td><td>GT</td><td>Pinhole</td></tr>
+          <tr><td>LeLaN</td><td>2</td><td>129</td><td>Real</td><td>Pseudo</td><td>Fisheye</td></tr>
+          <tr><td>CityWalker</td><td>2</td><td>2000</td><td>Real</td><td>Pseudo</td><td>Pinhole</td></tr>
+          <tr><td>FrodoBots-2k</td><td>2</td><td>2000</td><td>Real</td><td>Pseudo</td><td>Fisheye</td></tr>
+          <tr><td>OmniVLA</td><td>3</td><td>9500</td><td>Real</td><td>Pseudo</td><td>Fish &amp; Pin</td></tr>
+          <tr class="ours"><td>Ours</td><td>8</td><td>1000</td><td>Real</td><td>Pseudo</td><td>Pinhole</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
 <!-- ============ METHOD / PIPELINE ============ -->
-<section class="section section-alt" id="method">
+<section class="section" id="method">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Method</h2>
 
@@ -258,7 +294,7 @@
 </section>
 
 <!-- ============ RISK TRAJECTORY AUGMENTATION ============ -->
-<section class="section" id="augmentation">
+<section class="section section-alt" id="augmentation">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Risk Trajectory Augmentation</h2>
 
@@ -295,7 +331,7 @@
 </section>
 
 <!-- ============ RESULTS ============ -->
-<section class="section section-alt" id="results">
+<section class="section" id="results">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Results</h2>
 
@@ -450,41 +486,6 @@
   </div>
 </section>
 
-<!-- ============ DATASET ============ -->
-<section class="section" id="dataset">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Cross-Embodiment Dataset</h2>
-    <p class="content has-text-justified">
-      We collect roughly <b>1,000 hours</b> of real-world first-person video from the Internet spanning
-      <b>eight embodiment categories</b> — including people, cats, dogs, horses, bicycles, karts, and
-      cars. Depth, trajectories, and camera intrinsics are annotated automatically with Depth-Anything-3;
-      embodiment geometry is annotated per category. Navigation pretraining only requires <em>scale
-      consistency</em> between trajectories and observations, not exact metric alignment, which makes
-      web-scale video usable. Compared with existing datasets, ours offers by far the broadest embodiment
-      coverage.
-    </p>
-
-    <div class="table-container">
-      <table class="table is-fullwidth is-narrow results">
-        <thead>
-          <tr>
-            <th>Dataset</th><th>Embodiments</th><th>Hours</th><th>Source</th><th>Supervision</th><th>Camera</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>SCAND</td><td>2</td><td>9</td><td>Real</td><td>GT</td><td>Pinhole</td></tr>
-          <tr><td>TartanGround</td><td>3</td><td>~40</td><td>Synthetic</td><td>GT</td><td>Pinhole</td></tr>
-          <tr><td>LeLaN</td><td>2</td><td>129</td><td>Real</td><td>Pseudo</td><td>Fisheye</td></tr>
-          <tr><td>CityWalker</td><td>2</td><td>2000</td><td>Real</td><td>Pseudo</td><td>Pinhole</td></tr>
-          <tr><td>FrodoBots-2k</td><td>2</td><td>2000</td><td>Real</td><td>Pseudo</td><td>Fisheye</td></tr>
-          <tr><td>OmniVLA</td><td>3</td><td>9500</td><td>Real</td><td>Pseudo</td><td>Fish &amp; Pin</td></tr>
-          <tr class="ours"><td>Ours</td><td>8</td><td>1000</td><td>Real</td><td>Pseudo</td><td>Pinhole</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
 <!-- ============ VIDEO (optional) ============ -->
 <section class="section section-alt" id="video">
   <div class="container is-max-desktop">
@@ -511,6 +512,7 @@
 }</code></pre>
   </div>
 </section>
+
 
 <!-- ============ FOOTER ============ -->
 <footer class="footer">

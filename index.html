@@ -25,9 +25,14 @@
       font-weight: 500;
     }
     .publication-links .button:hover { background-color: #4a4a4a; color: #fff; }
-    /* left-aligned rather than justified: the narrow text columns stretch
-       word spacing badly when justified (!important overrides Bulma's helper) */
-    .content.has-text-justified { text-align: left !important; }
+    /* justified, but hyphenated: without hyphenation the narrow columns stretch
+       word spacing into visible rivers (needs lang="en" on <html>) */
+    .content.has-text-justified {
+      text-align: justify;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+      hyphenate-limit-chars: 6 3 3;
+    }
     pre code { background-color: transparent; }
     .eql-note { font-size: 0.9rem; color: #7a7a7a; margin-top: 0.4rem; }
     #dataset { background-color: #fafafa; }

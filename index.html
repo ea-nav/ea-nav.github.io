@@ -318,13 +318,6 @@
       and correction modules improves average performance by roughly <b>31%</b>, with the largest gains
       in the more cluttered Scene 2 and Scene 3.
     </p>
-    <figure class="fig">
-      <img src="static/images/sim_scenarios.jpg" alt="Simulation scenarios used for evaluation">
-      <figcaption>
-        <b>Evaluation scenarios.</b> Scene 1 (easy) and Scene 2 (hard) are built from NavDP assets with
-        increasing clutter; Scene 3 is a realistic indoor environment.
-      </figcaption>
-    </figure>
     <div class="table-container">
       <table class="table is-fullwidth is-narrow results">
         <thead>
@@ -359,26 +352,13 @@
       (Body &rarr; Body+ &rarr; Body++) to stress-test geometry awareness. Every baseline collapses to a
       100% collision rate at Body++; EA-Nav keeps navigating.
     </p>
-    <div class="columns">
-      <div class="column is-two-thirds">
-        <figure class="fig">
-          <img src="static/images/robot_setup.jpg" alt="Physical robots with enlarged embodiments">
-          <figcaption>
-            <b>Hardware setup.</b> The Go2 and TurtleBot platforms with physical extensions that widen
-            the embodiment from Body to Body+ and Body++, while the sensors stay unchanged.
-          </figcaption>
-        </figure>
-      </div>
-      <div class="column is-one-third">
-        <figure class="fig">
-          <img src="static/images/real_scene.jpg" alt="Real-world test scene with obstacles">
-          <figcaption>
-            <b>Test scene.</b> A gap formed by boxes and a traffic cone: passable for Body, impassable
-            once the embodiment grows.
-          </figcaption>
-        </figure>
-      </div>
-    </div>
+    <figure class="fig">
+      <img src="static/images/robot_setup.jpg" alt="Physical robots with enlarged embodiments">
+      <figcaption>
+        <b>Hardware setup.</b> The Go2 and TurtleBot platforms with physical extensions that widen
+        the embodiment from Body to Body+ and Body++, while the sensors stay unchanged.
+      </figcaption>
+    </figure>
     <div class="table-container">
       <table class="table is-fullwidth is-narrow results">
         <thead>
@@ -483,28 +463,6 @@
       web-scale video usable. Compared with existing datasets, ours offers by far the broadest embodiment
       coverage.
     </p>
-
-    <div class="columns is-vcentered">
-      <div class="column is-two-fifths">
-        <figure class="fig">
-          <img src="static/images/dataset_distribution.jpg" alt="Distribution of videos across embodiment categories">
-          <figcaption>
-            <b>Embodiment distribution.</b> 1,034 videos spanning eight categories, led by person, car,
-            and hm3d.
-          </figcaption>
-        </figure>
-      </div>
-      <div class="column is-three-fifths">
-        <figure class="fig">
-          <img src="static/images/scale_consistency.jpg" alt="Metric-scale versus scale-biased trajectory data">
-          <figcaption>
-            <b>Why scale consistency is enough.</b> (a) Metric-scale data and (b) scale-biased data
-            describe the same navigation behaviour once trajectories and observations share a scale, so
-            web video without metric calibration remains usable for pretraining.
-          </figcaption>
-        </figure>
-      </div>
-    </div>
 
     <div class="table-container">
       <table class="table is-fullwidth is-narrow results">

@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css">
 
   <style>
-    body { font-family: 'Noto Sans', sans-serif; }
+    body { font-family: 'Noto Sans', sans-serif; counter-reset: figure-counter table-counter; }
     .publication-title, .publication-authors, .title { font-family: 'Google Sans', sans-serif; }
     .publication-authors a { color: hsl(204, 86%, 43%) !important; }
     .publication-authors a:hover { text-decoration: underline; }
@@ -50,14 +50,14 @@
       width: 100%;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       margin-bottom: 0;
     }
     figure.fig.fill img {
-      flex: 1 1 auto;
-      min-height: 0;
-      max-height: none;
+      flex: none;
       width: 100%;
-      object-fit: contain;
+      height: auto;
+      max-height: none;
     }
     figure.fig figcaption {
       font-size: 0.92rem;
@@ -69,6 +69,29 @@
       min-width: 100%;
     }
     figure.fig figcaption b { color: #363636; }
+    figure.fig figcaption::before {
+      counter-increment: figure-counter;
+      content: "Figure " counter(figure-counter) ": ";
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 600;
+      color: #363636;
+    }
+
+    .table-caption {
+      font-size: 0.92rem;
+      color: #5a5a5a;
+      line-height: 1.5;
+      text-align: left;
+      margin-bottom: 0.7rem;
+    }
+    .table-caption b { color: #363636; }
+    .table-caption::before {
+      counter-increment: table-counter;
+      content: "Table " counter(table-counter) ": ";
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 600;
+      color: #363636;
+    }
 
     .module-card {
       border-left: 3px solid #363636;
@@ -230,6 +253,10 @@
     </p>
 
     <div class="table-container">
+      <p class="table-caption">
+        <b>Comparison with existing navigation datasets.</b> Our dataset covers eight embodiment
+        categories — the broadest coverage among real-world first-person navigation datasets.
+      </p>
       <table class="table is-fullwidth is-narrow results">
         <thead>
           <tr>
@@ -330,7 +357,7 @@
       <div class="column is-two-fifths">
         <div class="content has-text-justified">
           <p>
-            The t-SNE projection in (a) makes the ambiguity concrete. Visual features from different
+            The t-SNE projection in Figure 3(a) makes the ambiguity concrete. Visual features from different
             embodiments overlap heavily — they organize by <em>scene appearance</em> rather than by who
             is moving, so a policy that sees only pixels has no signal telling it which behaviour is
             expected. Trajectory features separate into far cleaner per-embodiment groups: a car, a dog,
@@ -338,7 +365,7 @@
             observation to action is therefore one-to-many unless something identifies the body.
           </p>
           <p>
-            Embodiment geometry supplies exactly that. The ablation in (b) toggles the geometry tokens
+            Embodiment geometry supplies exactly that. The ablation in Figure 3(b) toggles the geometry tokens
             with everything else held fixed. Conditioning lowers the training loss and — more tellingly —
             the validation loss, so the gain is not memorization: the model is resolving an ambiguity it
             previously had to average over. The success rate is consistently higher across pretraining,
@@ -443,6 +470,10 @@
       in the more cluttered Scene 2 and Scene 3.
     </p>
     <div class="table-container">
+      <p class="table-caption">
+        <b>Navigation results in simulation.</b> Success rate (SR) and success weighted by path length
+        (SPL) on InternUtopia with NavDP assets across three difficulty levels.
+      </p>
       <table class="table is-fullwidth is-narrow results">
         <thead>
           <tr>
@@ -485,6 +516,10 @@
       </figcaption>
     </figure>
     <div class="table-container">
+      <p class="table-caption">
+        <b>Navigation results on real robots.</b> Success rate (SR) and collision rate (CR) on the Go2
+        and TurtleBot platforms as the embodiment is physically widened from Body to Body++.
+      </p>
       <table class="table is-fullwidth is-narrow results">
         <thead>
           <tr>

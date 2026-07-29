@@ -15,7 +15,7 @@ Then open <http://localhost:8000>.
 ```
 index.html                 # the page
 static/images/             # figures
-static/videos/             # demo video (ea_nav_demo.mp4, not yet added)
+static/videos/             # ea-nav.mp4 (overview), simulation.mp4, real_world.mp4
 .nojekyll                  # serve files as-is on GitHub Pages
 ```
 

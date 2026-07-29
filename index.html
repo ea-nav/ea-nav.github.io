@@ -27,9 +27,8 @@
     .publication-links .button:hover { background-color: #4a4a4a; color: #fff; }
     .content.has-text-justified { text-align: justify; }
     pre code { background-color: transparent; }
-    .footer { background-color: #fafafa; padding: 2.5rem 1.5rem; }
     .eql-note { font-size: 0.9rem; color: #7a7a7a; margin-top: 0.4rem; }
-    .section-alt { background-color: #fafafa; }
+    #dataset { background-color: #fafafa; }
 
     figure.fig {
       margin: 0 auto 1.5rem auto;
@@ -44,13 +43,9 @@
       width: auto;
       border-radius: 6px;
     }
-    /* stretch a figure to match the height of the text column beside it */
+    /* figure that fills the width of a side-by-side column */
     figure.fig.fill {
-      height: 100%;
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
       margin-bottom: 0;
     }
     figure.fig.fill img {
@@ -93,10 +88,36 @@
       color: #363636;
     }
 
+    /* section subheadings: soft gradient tint fading out to the right */
+    section h3.title.is-5 {
+      padding: 0.5rem 0.9rem;
+      border-left: 3px solid hsl(204, 86%, 53%);
+      border-radius: 3px;
+      background: linear-gradient(
+        90deg,
+        hsla(204, 86%, 53%, 0.13) 0%,
+        hsla(204, 86%, 53%, 0.05) 45%,
+        hsla(204, 86%, 53%, 0) 100%
+      );
+    }
+
+    /* text column in a side-by-side text/figure block: faint tinted panel */
+    .columns > .column > .content.has-text-justified {
+      background-color: hsla(204, 86%, 53%, 0.04);
+      border-radius: 6px;
+      /* bleed the tint outward so the text itself stays aligned with the figure,
+         and stretch it to the figure column's height so both bottoms line up */
+      margin: -1rem -0.75rem 0;
+      padding: 1rem 0.75rem;
+      height: calc(100% + 1rem);
+      box-sizing: border-box;
+    }
+    .columns > .column > .content.has-text-justified > p:last-child { margin-bottom: 0; }
+
     .module-card {
       border-left: 3px solid #363636;
       padding: 0.2rem 0 0.2rem 1rem;
-      margin-bottom: 1.25rem;
+      height: 100%;
     }
     .module-card h4 {
       font-family: 'Google Sans', sans-serif;
@@ -115,10 +136,59 @@
     }
     .module-card p { margin: 0; font-size: 0.97rem; line-height: 1.6; }
 
-    table.results { font-size: 0.9rem; }
-    table.results th { font-family: 'Google Sans', sans-serif; }
-    table.results .ours { background-color: #f5f9fd; font-weight: 600; }
+    /* booktabs-style three-line table */
+    table.results {
+      font-size: 0.9rem;
+      background-color: transparent;
+      border-collapse: collapse;
+      border-top: 2px solid #363636;
+      border-bottom: 2px solid #363636;
+    }
+    table.results th,
+    table.results td {
+      border: 0 !important;
+      background-color: transparent;
+      padding: 0.5em 0.75em;
+      vertical-align: middle;
+      text-align: center !important;
+    }
+    /* label columns stay left-aligned; every data column is centered under its header */
+    table.results thead tr:first-child th:first-child,
+    table.results tbody td:first-child,
+    table.results thead th[rowspan],
+    table.results tbody tr:has(td[rowspan]) td:nth-child(2) {
+      text-align: left !important;
+    }
+    table.results th {
+      font-family: 'Google Sans', sans-serif;
+      color: #363636;
+    }
+    /* rule under the header block */
+    table.results thead tr:last-child th,
+    table.results thead th[rowspan] {
+      border-bottom: 1px solid #363636 !important;
+    }
+    /* cmidrule under spanning group headers */
+    table.results thead tr:first-child th[colspan] {
+      border-bottom: 1px solid #b5b5b5 !important;
+    }
+    table.results tbody tr:hover { background-color: transparent; }
+    table.results .ours { font-weight: 600; }
+    table.results .ours td {
+      color: #363636;
+      background-color: hsla(204, 86%, 53%, 0.08);
+    }
+    /* thin separator between row groups (rowspan blocks) */
+    table.results tbody tr:has(td[rowspan]) td { border-top: 1px solid #dbdbdb !important; }
+    table.results tbody tr:first-child td { border-top: 0 !important; }
     .table-note { font-size: 0.85rem; color: #7a7a7a; margin-top: 0.5rem; }
+    .media-caption {
+      font-size: 0.92rem;
+      color: #5a5a5a;
+      line-height: 1.5;
+      margin-top: 0.7rem;
+    }
+    .media-caption b { color: #363636; }
     .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; }
     .video-wrap iframe, .video-wrap video {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 6px;
@@ -161,26 +231,23 @@
           <p class="eql-note"><sup>*</sup>Equal contribution &nbsp;&nbsp; <sup>†</sup>Corresponding authors</p>
 
           <div class="is-size-6 has-text-grey" style="margin-top: 0.6rem;">
-            ACM Multimedia 2026, Rio de Janeiro, Brazil
+            Accepted to the 34th ACM International Conference on Multimedia
+            (<b>ACM MM 2026</b>), Rio de Janeiro, Brazil
           </div>
 
           <div class="column has-text-centered" style="margin-top: 1.5rem;">
             <div class="publication-links buttons is-centered">
-              <a href="https://arxiv.org/pdf/2607.19880" class="button is-normal">
-                <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                <span>Paper</span>
-              </a>
               <a href="https://arxiv.org/abs/2607.19880" class="button is-normal">
                 <span class="icon"><i class="ai ai-arxiv"></i></span>
                 <span>arXiv</span>
               </a>
-              <a href="https://github.com/TODO/EA-Nav" class="button is-normal">
-                <span class="icon"><i class="fab fa-github"></i></span>
-                <span>Code</span>
+              <a href="#video" class="button is-normal">
+                <span class="icon"><i class="fas fa-play-circle"></i></span>
+                <span>Video</span>
               </a>
-              <a href="#results" class="button is-normal">
-                <span class="icon"><i class="fas fa-chart-bar"></i></span>
-                <span>Results</span>
+              <a href="#BibTeX" class="button is-normal">
+                <span class="icon"><i class="fas fa-quote-left"></i></span>
+                <span>Cite</span>
               </a>
             </div>
           </div>
@@ -204,17 +271,24 @@
         geometry.
       </figcaption>
     </figure>
+
+    <!-- Overview video -->
+    <div id="video" style="margin-top: 2.5rem;">
+      <div class="video-wrap">
+        <video controls playsinline preload="metadata">
+          <source src="static/videos/ea-nav.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ============ ABSTRACT ============ -->
 <section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
+    <h2 class="title is-3 has-text-centered">Abstract</h2>
+    <div class="content has-text-justified">
+      <p>
             Cross-embodiment navigation is a key challenge in embodied intelligence. Due to differences
             in embodiment, the same visual observation may imply different actions for different agents,
             making prediction ambiguous when relying solely on vision. Existing studies mainly rely on
@@ -231,15 +305,13 @@
             geometry for safe navigation. Experimental results show that the proposed method effectively
             improves navigation performance across different embodiment settings, demonstrating the
             effectiveness of incorporating embodiment geometry into embodied navigation.
-          </p>
-        </div>
-      </div>
+      </p>
     </div>
   </div>
 </section>
 
 <!-- ============ DATASET ============ -->
-<section class="section section-alt" id="dataset">
+<section class="section" id="dataset">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Cross-Embodiment Dataset</h2>
     <p class="content has-text-justified">
@@ -282,6 +354,7 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Method</h2>
 
+    <h3 class="title is-5" style="margin-top: 1rem;">Framework Overview</h3>
     <div class="content has-text-justified" style="margin-bottom: 2rem;">
       <p>
         EA-Nav takes an image sequence, the current depth observation, an egocentric goal, and a
@@ -304,16 +377,16 @@
       </figcaption>
     </figure>
 
-    <div class="columns is-multiline" style="margin-top: 1rem;">
+    <h3 class="title is-5" style="margin-top: 2.5rem;">Model Components</h3>
+    <div class="columns is-multiline" style="margin-top: 0.5rem;">
       <div class="column is-half">
         <div class="module-card">
           <h4><i class="fas fa-layer-group"></i>Input Encoder</h4>
           <p>
             RGB (DINOv3-S) and depth (ConvNeXt-T) features, together with goal and geometry tokens, are
             projected into a shared 384-d space, giving 130 context tokens — far more than the 8–10 used
-            by prior work, preserving fine-grained spatial detail. A <b>unidirectional cross-attention</b>
-            lets the action query read the context without writing back to it, keeping the shared
-            representation clean for the downstream modules.
+            by prior work. A <b>unidirectional cross-attention</b> lets the action query read this
+            context without writing back to it, keeping the shared representation clean.
           </p>
         </div>
       </div>
@@ -321,9 +394,10 @@
         <div class="module-card">
           <h4><i class="fas fa-route"></i>Action Prediction</h4>
           <p>
-            Decodes the action tokens into a sequence of linear and angular velocities, then converts
-            them into a local waypoint trajectory and encodes it as an explicit spatial trajectory
-            feature for the two downstream modules to reason over.
+            Decodes the action tokens into a sequence of linear and angular velocities, then integrates
+            them into a local waypoint trajectory in the robot frame. The trajectory is re-encoded as an
+            explicit <b>spatial trajectory feature</b>, giving the two downstream modules a geometric
+            handle on where the policy intends to go.
           </p>
         </div>
       </div>
@@ -332,9 +406,9 @@
           <h4><i class="fas fa-ruler-combined"></i>Spatial Perception</h4>
           <p>
             Predicts the minimum obstacle distance at each waypoint and flags the trajectory as high-risk
-            when it falls below the safety threshold &delta;<sub>s</sub> = 0.5 m. Because this task needs
-            finer, more geometry-aware features than action regression, its loss is allowed to update the
-            shared context — which proves critical for convergence.
+            when it falls below the safety threshold &delta;<sub>s</sub> = 0.5 m. It needs finer
+            geometry-aware features than action regression, so its loss also updates the shared
+            context — critical for convergence.
           </p>
         </div>
       </div>
@@ -359,18 +433,18 @@
           <p>
             The t-SNE projection in Figure 3(a) makes the ambiguity concrete. Visual features from different
             embodiments overlap heavily — they organize by <em>scene appearance</em> rather than by who
-            is moving, so a policy that sees only pixels has no signal telling it which behaviour is
-            expected. Trajectory features separate into far cleaner per-embodiment groups: a car, a dog,
-            and a person crossing the same space leave visibly different paths. The mapping from
-            observation to action is therefore one-to-many unless something identifies the body.
+            is moving, so a policy that sees only pixels cannot tell which behaviour is expected.
+            Trajectory features separate into far cleaner per-embodiment groups: a car, a dog, and a
+            person crossing the same space leave visibly different paths. The observation-to-action
+            mapping is therefore one-to-many unless something identifies the body.
           </p>
           <p>
             Embodiment geometry supplies exactly that. The ablation in Figure 3(b) toggles the geometry tokens
             with everything else held fixed. Conditioning lowers the training loss and — more tellingly —
             the validation loss, so the gain is not memorization: the model is resolving an ambiguity it
-            previously had to average over. The success rate is consistently higher across pretraining,
-            and the validation-loss gap persists to the end of the run rather than closing, indicating
-            the benefit comes from better-posed supervision rather than merely faster optimization.
+            previously had to average over. The success rate stays consistently higher, and the
+            validation-loss gap persists to the end of the run rather than closing — the benefit is
+            better-posed supervision, not merely faster optimization.
           </p>
         </div>
       </div>
@@ -389,31 +463,31 @@
 </section>
 
 <!-- ============ RISK TRAJECTORY AUGMENTATION ============ -->
-<section class="section section-alt" id="augmentation">
+<section class="section" id="augmentation">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Risk Trajectory Augmentation</h2>
 
-    <div class="content has-text-justified" style="margin-bottom: 1.5rem;">
+    <!-- 1. Why augmentation is needed, and the environment model it builds on -->
+    <h3 class="title is-5" style="margin-top: 1rem;">Why Augment in Fine-Tuning?</h3>
+    <div class="content has-text-justified">
       <p>
-        Real navigation datasets contain almost no collisions, so there is little to learn risk
-        perception and correction from. We synthesize them offline in three steps: fuse short-horizon
-        depth observations into a robot-centric point cloud, fit the ground plane with RANSAC and inflate
-        obstacles by the robot's own dimensions to build an <b>embodiment-aware occupancy grid</b>, then
-        scale and rotate the original trajectory to sweep a candidate pool. Colliding candidates become
-        risk trajectories; collision-free ones define the feasible correction bins used as multi-hot
-        labels. All of this happens at training time only — never at test time.
+        Real navigation datasets are recorded by competent operators, so they contain almost no
+        collisions: the very samples that would teach risk perception and risk-aware correction are the
+        ones that never appear. Fine-tuning on such data therefore leaves both downstream heads without
+        supervision, and no amount of additional demonstration data fixes it — the missing behaviour is
+        by construction absent from expert trajectories.
+      </p>
+      <p>
+        Our answer is to synthesize the missing samples offline, which first requires knowing where the
+        free space actually is. For each clip we fuse short-horizon depth observations into a
+        robot-centric point cloud, fit the ground plane with RANSAC, and inflate the remaining obstacles
+        by the robot's own dimensions to obtain an <b>embodiment-aware occupancy grid</b>. Because the
+        inflation is driven by the embodiment vector, the same scene yields a different notion of
+        traversability for a cat, a horse, or a wheeled robot.
       </p>
     </div>
 
     <figure class="fig">
-      <img src="static/images/augmentation.jpg" alt="Augmentation pipeline">
-      <figcaption>
-        <b>Augmentation pipeline.</b> Light blue: original trajectory; pink: generated trajectory
-        cluster; red: selected collision trajectory; green: corresponding traversable trajectory.
-      </figcaption>
-    </figure>
-
-    <figure class="fig" style="margin-top: 2rem;">
       <img src="static/images/env_modeling.jpg" alt="Environment modeling visualization">
       <figcaption>
         <b>Environment modeling across embodiments.</b> Reconstructed local point clouds and the
@@ -423,21 +497,67 @@
       </figcaption>
     </figure>
 
-    <!-- Spatial perception -->
-    <h3 class="title is-5" style="margin-top: 2.5rem;">Effect of Risk Trajectory Augmentation</h3>
-    <p class="content">
-      On the i2Nav dataset across five embodiment radii (0.5 m to 2.5 m; Body-L lies outside the training
-      range and tests generalization). Augmentation improves recognition of high-risk and collision
-      samples by roughly <b>5&times;</b> with almost no additional false alarms.
-    </p>
-    <figure class="fig">
-      <img src="static/images/spatial_perception.jpg" alt="Predicted obstacle clearance for different embodiment sizes">
-      <figcaption>
-        <b>Spatial perception under different embodiment sizes.</b> Given the same observation sequence,
-        the predicted clearance around each waypoint (blue discs) grows with the embodiment. For Body-L
-        the trajectory no longer fits, and the affected waypoints are flagged as high-risk (red).
-      </figcaption>
-    </figure>
+    <!-- 2. How risk samples and their corrections are generated -->
+    <h3 class="title is-5" style="margin-top: 2.5rem;">Generating Risk and Correction Samples</h3>
+    <div class="columns">
+      <div class="column is-one-third">
+        <div class="content has-text-justified">
+          <p>
+            With the occupancy grid in place, we scale and rotate the expert trajectory to sweep a pool
+            of candidates. Testing each against the grid splits the pool in two: colliding candidates
+            become <b>risk trajectories</b> that supervise spatial perception, the collision-free ones
+            define the <b>feasible correction bins</b>.
+          </p>
+          <p>
+            Each risk sample is thus paired with the recoveries that would have worked from that state —
+            the basis for multi-hot supervision. All of this runs offline; none of it is needed at
+            inference.
+          </p>
+        </div>
+      </div>
+      <div class="column is-two-thirds">
+        <figure class="fig fill">
+          <img src="static/images/augmentation.jpg" alt="Augmentation pipeline">
+          <figcaption>
+            <b>Augmentation pipeline.</b> Light blue: original trajectory; pink: generated trajectory
+            cluster; red: selected collision trajectory; green: corresponding traversable trajectory.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- 3. What the resulting spatial perception can do -->
+    <h3 class="title is-5" style="margin-top: 2.5rem;">Resulting Spatial Perception</h3>
+    <div class="columns">
+      <div class="column is-two-fifths">
+        <div class="content has-text-justified">
+          <p>
+            Trained on these samples, spatial perception reads clearance off the scene as a function of
+            the body it is given. On the i2Nav dataset across five embodiment radii (0.5 m to 2.5 m,
+            with Body-L lying outside the training range to test generalization), augmentation improves
+            recognition of high-risk and collision samples by roughly <b>5&times;</b> with almost no
+            additional false alarms — the model becomes more cautious where it should be, not
+            everywhere.
+          </p>
+          <p>
+            Qualitatively, the same gap is passable for Body-S, tight for Body-M, and blocked for the
+            unseen Body-L, whose waypoints are flagged rather than driven through. Risk is read off
+            the scene <i>and</i> the body, not the scene alone.
+          </p>
+        </div>
+      </div>
+      <div class="column is-three-fifths">
+        <figure class="fig fill">
+          <img src="static/images/spatial_perception.jpg" alt="Predicted obstacle clearance for different embodiment sizes">
+          <figcaption>
+            <b>Spatial perception under different embodiment sizes.</b> Given the same observation
+            sequence, the predicted clearance around each waypoint (blue discs) grows with the
+            embodiment. For Body-L the trajectory no longer fits, and the affected waypoints are
+            flagged as high-risk (red).
+          </figcaption>
+        </figure>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -448,19 +568,33 @@
 
     <!-- Hardware setup -->
     <h3 class="title is-5" style="margin-top: 1rem;">Robot Setup</h3>
-    <p class="content">
-      We deploy on a Unitree Go2 and a TurtleBot. To stress-test geometry awareness, each platform is
-      physically widened in two stages (Body &rarr; Body+ &rarr; Body++) while the sensors and their
-      mounting stay unchanged — so the observation is identical and only the embodiment vector
-      <em>m</em> changes.
-    </p>
-    <figure class="fig">
-      <img src="static/images/robot_setup.jpg" alt="Physical robots with enlarged embodiments">
-      <figcaption>
-        <b>Hardware setup.</b> The Go2 and TurtleBot platforms with physical extensions that widen
-        the embodiment from Body to Body+ and Body++, while the sensors stay unchanged.
-      </figcaption>
-    </figure>
+    <div class="columns">
+      <div class="column is-two-fifths">
+        <div class="content has-text-justified">
+          <p>
+            We deploy EA-Nav on two platforms with very different dynamics: a Unitree Go2 quadruped and
+            a wheeled TurtleBot. To stress-test geometry awareness we deliberately do not swap robots —
+            instead each platform is physically widened in two stages (Body &rarr; Body+ &rarr; Body++)
+            by mounting rigid panels along its sides.
+          </p>
+          <p>
+            The camera and its mounting position stay untouched, so the visual observation is unchanged
+            across the three settings and the only thing that differs is the embodiment vector
+            <em>m</em>. Any change in behaviour is therefore attributable to geometry conditioning
+            rather than to a shift in visual domain.
+          </p>
+        </div>
+      </div>
+      <div class="column is-three-fifths">
+        <figure class="fig fill">
+          <img src="static/images/robot_setup.jpg" alt="Physical robots with enlarged embodiments">
+          <figcaption>
+            <b>Hardware setup.</b> The Go2 and TurtleBot platforms with physical extensions that widen
+            the embodiment from Body to Body+ and Body++, while the sensors stay unchanged.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
 
     <!-- Simulation -->
     <h3 class="title is-5" style="margin-top: 2.5rem;">Navigation in Simulation</h3>
@@ -502,10 +636,14 @@
 
     <!-- Real world -->
     <h3 class="title is-5" style="margin-top: 2.5rem;">Navigation on Real Robots</h3>
-    <p class="content">
-      Five trials per method per setting on the two platforms above. Every baseline collapses to a
-      100% collision rate at Body++; EA-Nav keeps navigating.
-    </p>
+    <div class="content has-text-justified">
+      <p>
+        Five trials per method per setting. From an identical observation, EA-Nav takes the narrow gap
+        at Body and switches to the open detour as the body is widened to Body+ and Body++, with the
+        route in (c) bending outward in proportion to the embodiment. Baselines see only the image,
+        commit to the gap at every size, and collapse to a 100% collision rate at Body++.
+      </p>
+    </div>
     <figure class="fig">
       <img src="static/images/real_world.jpg" alt="Embodiment-aware navigation strategies across robots">
       <figcaption>
@@ -551,18 +689,53 @@
       </table>
       <p class="table-note">SR: success rate. CR: collision rate. Five trials per method per setting.</p>
     </div>
+
+    <!-- Demo videos -->
+    <h3 class="title is-5" id="demo" style="margin-top: 2.5rem;">Demo</h3>
+    <div class="columns" style="margin-top: 0.5rem;">
+      <div class="column is-half">
+        <div class="video-wrap">
+          <video controls muted loop playsinline preload="metadata">
+            <source src="static/videos/simulation.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="media-caption"><b>Simulation.</b> Navigation in InternUtopia across difficulty levels.</p>
+      </div>
+      <div class="column is-half">
+        <div class="video-wrap">
+          <video controls muted loop playsinline preload="metadata">
+            <source src="static/videos/real_world.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="media-caption"><b>Real world.</b> Deployment on the Go2 and TurtleBot platforms.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ============ VIDEO (optional) ============ -->
-<section class="section section-alt" id="video">
+<!-- ============ CONCLUSION & LIMITATION ============ -->
+<section class="section" id="conclusion">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Video</h2>
-    <div class="video-wrap">
-      <!-- Replace with your own upload, or swap in a YouTube/Bilibili iframe -->
-      <video controls poster="static/images/teaser.jpg">
-        <source src="static/videos/ea_nav_demo.mp4" type="video/mp4">
-      </video>
+    <h2 class="title is-3 has-text-centered">Conclusion and Limitation</h2>
+
+    <div class="content has-text-justified" style="margin-top: 1.5rem;">
+      <p>
+        <b>Conclusion.</b> We present an imitation-learning-based navigation framework that treats embodiment geometry as a
+        first-class input rather than an afterthought for a downstream planner. Pretraining builds a
+        cross-embodiment dataset from Internet videos and injects geometry as conditional tokens;
+        fine-tuning adds risk trajectory augmentation and a decoupled architecture so that spatial
+        perception and risk-aware correction can be trained on synthesized high-risk samples. The
+        resulting policy adapts its route to the body it is driving, and keeps navigating at embodiment
+        sizes where every baseline collapses to a 100% collision rate.
+      </p>
+      <p>
+        <b>Limitation.</b> Our formulation describes the embodiment with a compact geometric vector, leaving out
+        kinodynamic factors such as turning radius and acceleration limits; deployment therefore remains
+        limited on embodiments whose motion patterns differ substantially from those seen in training,
+        even when their geometry is similar. Future work will incorporate richer embodiment attributes,
+        so that a policy can reason not only about how much space a body occupies but also about how
+        that body is able to move.
+      </p>
     </div>
   </div>
 </section>
@@ -580,27 +753,6 @@
 }</code></pre>
   </div>
 </section>
-
-
-<!-- ============ FOOTER ============ -->
-<footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8 has-text-centered content">
-        <p>
-          This work was supported in part by the "Pioneer and Leading Goose" R&amp;D Program of Zhejiang
-          Province, China, under Grant 2023C01067.
-        </p>
-        <p>
-          This website is licensed under a
-          <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
-          Attribution-ShareAlike 4.0 International License</a>. It borrows the
-          <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page template.
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
 
 </body>
 </html>

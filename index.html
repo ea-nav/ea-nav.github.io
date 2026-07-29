@@ -311,18 +311,38 @@
 
     <!-- Feature analysis -->
     <h3 class="title is-5" style="margin-top: 2.5rem;">Does Embodiment Geometry Matter?</h3>
-    <p class="content">
-      Visual features cluster by scene rather than by agent, while trajectory features separate cleanly
-      by embodiment — the same observation genuinely implies different actions. Conditioning on geometry
-      lowers both training and validation loss and raises the success rate throughout pretraining.
-    </p>
-    <figure class="fig">
-      <img src="static/images/feature_vis.jpg" alt="t-SNE of visual and trajectory features, and geometry ablation curves">
-      <figcaption>
-        <b>Feature analysis and ablation.</b> (a) t-SNE of visual and trajectory features across
-        embodiments. (b) Training/validation loss and success rate with and without embodiment geometry.
-      </figcaption>
-    </figure>
+    <div class="columns">
+      <div class="column is-two-fifths">
+        <div class="content has-text-justified">
+          <p>
+            The t-SNE projection in (a) makes the ambiguity concrete. Visual features from different
+            embodiments overlap heavily — they organize by <em>scene appearance</em> rather than by who
+            is moving, so a policy that sees only pixels has no signal telling it which behaviour is
+            expected. Trajectory features separate into far cleaner per-embodiment groups: a car, a dog,
+            and a person crossing the same space leave visibly different paths. The mapping from
+            observation to action is therefore one-to-many unless something identifies the body.
+          </p>
+          <p>
+            Embodiment geometry supplies exactly that. The ablation in (b) toggles the geometry tokens
+            with everything else held fixed. Conditioning lowers the training loss and — more tellingly —
+            the validation loss, so the gain is not memorization: the model is resolving an ambiguity it
+            previously had to average over. The success rate is consistently higher across pretraining,
+            and the validation-loss gap persists to the end of the run rather than closing, indicating
+            the benefit comes from better-posed supervision rather than merely faster optimization.
+          </p>
+        </div>
+      </div>
+      <div class="column is-three-fifths">
+        <figure class="fig" style="margin-bottom: 0;">
+          <img src="static/images/feature_vis.jpg" alt="t-SNE of visual and trajectory features, and geometry ablation curves">
+          <figcaption>
+            <b>Feature analysis and ablation.</b> (a) t-SNE of visual and trajectory features across
+            embodiments. (b) Training/validation loss and success rate with and without embodiment
+            geometry.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
   </div>
 </section>
 

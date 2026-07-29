@@ -300,6 +300,21 @@
         </div>
       </div>
     </div>
+
+    <!-- Feature analysis -->
+    <h3 class="title is-5" style="margin-top: 2.5rem;">Does embodiment geometry matter?</h3>
+    <p class="content">
+      Visual features cluster by scene rather than by agent, while trajectory features separate cleanly
+      by embodiment — the same observation genuinely implies different actions. Conditioning on geometry
+      lowers both training and validation loss and raises the success rate throughout pretraining.
+    </p>
+    <figure class="fig">
+      <img src="static/images/feature_vis.jpg" alt="t-SNE of visual and trajectory features, and geometry ablation curves">
+      <figcaption>
+        <b>Feature analysis and ablation.</b> (a) t-SNE of visual and trajectory features across
+        embodiments. (b) Training/validation loss and success rate with and without embodiment geometry.
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -361,15 +376,19 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Results</h2>
 
-    <!-- Qualitative -->
-    <h3 class="title is-5" style="margin-top: 1rem;">Embodiment-aware behavior</h3>
+    <!-- Hardware setup -->
+    <h3 class="title is-5" style="margin-top: 1rem;">Robot setup</h3>
+    <p class="content">
+      We deploy on a Unitree Go2 and a TurtleBot. To stress-test geometry awareness, each platform is
+      physically widened in two stages (Body &rarr; Body+ &rarr; Body++) while the sensors and their
+      mounting stay unchanged — so the observation is identical and only the embodiment vector
+      <em>m</em> changes.
+    </p>
     <figure class="fig">
-      <img src="static/images/real_world.jpg" alt="Embodiment-aware navigation strategies across robots">
+      <img src="static/images/robot_setup.jpg" alt="Physical robots with enlarged embodiments">
       <figcaption>
-        <b>Navigation strategies across different robots.</b> Path selection on (a) TurtleBot and
-        (b) Go2, and (c) the effect of embodiment size on the chosen route. Smaller embodiments squeeze
-        through narrow gaps, while larger ones prefer open routes or detour around the same obstacles —
-        from an identical visual observation.
+        <b>Hardware setup.</b> The Go2 and TurtleBot platforms with physical extensions that widen
+        the embodiment from Body to Body+ and Body++, while the sensors stay unchanged.
       </figcaption>
     </figure>
 
@@ -408,19 +427,11 @@
     </div>
 
     <!-- Real world -->
-    <h3 class="title is-5" style="margin-top: 2.5rem;">Real-world deployment</h3>
+    <h3 class="title is-5" style="margin-top: 2.5rem;">Navigation on real robots</h3>
     <p class="content">
-      Deployed on a Unitree Go2 and a TurtleBot, with the embodiment artificially enlarged
-      (Body &rarr; Body+ &rarr; Body++) to stress-test geometry awareness. Every baseline collapses to a
+      Five trials per method per setting on the two platforms above. Every baseline collapses to a
       100% collision rate at Body++; EA-Nav keeps navigating.
     </p>
-    <figure class="fig">
-      <img src="static/images/robot_setup.jpg" alt="Physical robots with enlarged embodiments">
-      <figcaption>
-        <b>Hardware setup.</b> The Go2 and TurtleBot platforms with physical extensions that widen
-        the embodiment from Body to Body+ and Body++, while the sensors stay unchanged.
-      </figcaption>
-    </figure>
     <div class="table-container">
       <table class="table is-fullwidth is-narrow results">
         <thead>
@@ -454,18 +465,13 @@
       <p class="table-note">SR: success rate. CR: collision rate. Five trials per method per setting.</p>
     </div>
 
-    <!-- Feature analysis -->
-    <h3 class="title is-5" style="margin-top: 2.5rem;">Does embodiment geometry matter?</h3>
-    <p class="content">
-      Visual features cluster by scene rather than by agent, while trajectory features separate cleanly
-      by embodiment — the same observation genuinely implies different actions. Conditioning on geometry
-      lowers both training and validation loss and raises the success rate throughout pretraining.
-    </p>
-    <figure class="fig">
-      <img src="static/images/feature_vis.jpg" alt="t-SNE of visual and trajectory features, and geometry ablation curves">
+    <figure class="fig" style="margin-top: 2rem;">
+      <img src="static/images/real_world.jpg" alt="Embodiment-aware navigation strategies across robots">
       <figcaption>
-        <b>Feature analysis and ablation.</b> (a) t-SNE of visual and trajectory features across
-        embodiments. (b) Training/validation loss and success rate with and without embodiment geometry.
+        <b>Navigation strategies across different robots.</b> Path selection on (a) TurtleBot and
+        (b) Go2, and (c) the effect of embodiment size on the chosen route. Smaller embodiments squeeze
+        through narrow gaps, while larger ones prefer open routes or detour around the same obstacles —
+        from an identical visual observation.
       </figcaption>
     </figure>
   </div>

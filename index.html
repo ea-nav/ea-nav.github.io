@@ -44,6 +44,21 @@
       width: auto;
       border-radius: 6px;
     }
+    /* stretch a figure to match the height of the text column beside it */
+    figure.fig.fill {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0;
+    }
+    figure.fig.fill img {
+      flex: 1 1 auto;
+      min-height: 0;
+      max-height: none;
+      width: 100%;
+      object-fit: contain;
+    }
     figure.fig figcaption {
       font-size: 0.92rem;
       color: #5a5a5a;
@@ -333,7 +348,7 @@
         </div>
       </div>
       <div class="column is-three-fifths">
-        <figure class="fig" style="margin-bottom: 0;">
+        <figure class="fig fill">
           <img src="static/images/feature_vis.jpg" alt="t-SNE of visual and trajectory features, and geometry ablation curves">
           <figcaption>
             <b>Feature analysis and ablation.</b> (a) t-SNE of visual and trajectory features across

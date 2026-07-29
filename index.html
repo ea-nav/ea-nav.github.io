@@ -105,11 +105,12 @@
     .columns > .column > .content.has-text-justified {
       background-color: hsla(204, 86%, 53%, 0.04);
       border-radius: 6px;
-      /* bleed the tint outward so the text itself stays aligned with the figure,
-         and stretch it to the figure column's height so both bottoms line up */
+      /* bleed the tint outward so the text itself stays aligned with the figure;
+         min-height lines the bottom up with the figure column without clipping
+         when the text runs longer than the figure */
       margin: -1rem -0.75rem 0;
       padding: 1rem 0.75rem;
-      height: calc(100% + 1rem);
+      min-height: calc(100% + 1rem);
       box-sizing: border-box;
     }
     .columns > .column > .content.has-text-justified > p:last-child { margin-bottom: 0; }
@@ -542,7 +543,8 @@
           <p>
             Qualitatively, the same gap is passable for Body-S, tight for Body-M, and blocked for the
             unseen Body-L, whose waypoints are flagged rather than driven through. Risk is read off
-            the scene <i>and</i> the body, not the scene alone.
+            the scene <i>and</i> the body, not the scene alone. Since correction only fires above the
+            risk threshold, this reading also decides when the robot detours at all.
           </p>
         </div>
       </div>

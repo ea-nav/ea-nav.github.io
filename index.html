@@ -101,18 +101,8 @@
       );
     }
 
-    /* text column in a side-by-side text/figure block: faint tinted panel */
-    .columns > .column > .content.has-text-justified {
-      background-color: hsla(204, 86%, 53%, 0.04);
-      border-radius: 6px;
-      /* bleed the tint outward so the text itself stays aligned with the figure;
-         min-height lines the bottom up with the figure column without clipping
-         when the text runs longer than the figure */
-      margin: -1rem -0.75rem 0;
-      padding: 1rem 0.75rem;
-      min-height: calc(100% + 1rem);
-      box-sizing: border-box;
-    }
+    /* text column in a side-by-side text/figure block: plain text, no panel,
+       so its first line starts level with the top of the figure beside it */
     .columns > .column > .content.has-text-justified > p:last-child { margin-bottom: 0; }
 
     .module-card {
